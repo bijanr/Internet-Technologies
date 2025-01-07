@@ -1,0 +1,43 @@
+/* Basic styles */
+body {
+  margin: 0;
+  height: 100vh;
+  overflow: hidden;
+  cursor: none; /* Hide default cursor */
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(40, 31, 31, 1) 100%);
+}
+
+/* Custom cursor */
+.cursor {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  pointer-events: none; /* Prevent interaction */
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+
+  /* New blended gradient */
+  background: linear-gradient(
+    45deg,
+    rgba(0, 0, 0, 0.8),
+    #ff006e 30%,
+    #8338ec 60%,
+    #3a86ff,
+    rgba(40, 31, 31, 0.8) 100%
+  );
+  background-size: 300% 300%;
+  animation: gradientMove 2s infinite;
+
+  /* Outer glowing effect */
+  box-shadow: 0 0 20px 5px rgba(255, 0, 110, 0.5),
+              0 0 40px 10px rgba(131, 56, 236, 0.5),
+              0 0 60px 15px rgba(58, 134, 255, 0.5);
+}
+
+/* Gradient animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}

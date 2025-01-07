@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        table th, table td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
+        table th {
+            background-color: #6c7ae0;
+            color: white;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #6c7ae0;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #5555dd;
+        }
+        .form-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-container input {
+            padding: 10px;
+            margin: 0 5px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Student Records</h1>
+    <table id="studentTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Roll No.</th>
+                <th>Marks</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Student rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+    <div class="form-container">
+        <input type="text" id="name" placeholder="Enter Name">
+        <input type="text" id="rollNo" placeholder="Enter Roll No.">
+        <input type="number" id="marks" placeholder="Enter Marks">
+    </div>
+
+    <div class="button-container">
+        <button onclick="addRecord()">Add Record</button>
+        <button onclick="sortRecords()">Sort by Marks</button>
+    </div>
+
+    <script>
+        function addRecord() {
+            const name = document.getElementById('name').value;
+            const rollNo = document.getElementById('rollNo').value;
+            const marks = document.getElementById('marks').value;
+
+            if (!name || !rollNo || !marks) {
+                alert('Please fill in all fields.');
+                return;
+            }
+
+            const table = document.getElementById('studentTable').getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+
+            const nameCell = newRow.insertCell(0);
+            const rollNoCell = newRow.insertCell(1);
+            const marksCell = newRow.insertCell(2);
+
+            nameCell.textContent = name;
+            rollNoCell.textContent = rollNo;
+            marksCell.textContent = marks;
+
+            document.getElementById('name').value = '';
+            document.getElementById('rollNo').value = '';
+            document.getElementById('marks').value = '';
+        }
+
+        function sortRecords() {
+            const table = document.getElementById('studentTable');
+            const tbody = table.getElementsByTagName('tbody')[0];
+            const rows = Array.from(tbody.rows);
+
+            rows.sort((a, b) => {
+                const marksA = parseInt(a.cells[2].textContent, 10);
+                const marksB = parseInt(b.cells[2].textContent, 10);
+                return marksA - marksB;
+            });
+
+            rows.forEach(row => tbody.appendChild(row));
+        }
+    </script>
+</body>
+</html>
